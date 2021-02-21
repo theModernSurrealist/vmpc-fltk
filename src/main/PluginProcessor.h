@@ -58,6 +58,8 @@ private:
     bool wasPlaying = false;
     bool wasBouncing = false;
     bool wasRecordingSound = false;
+    
+    std::map<std::string, juce::AudioParameterBool*> buttonStates;
 
 public:
     bool shouldShowDisclaimer = true;

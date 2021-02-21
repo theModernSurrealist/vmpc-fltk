@@ -2,11 +2,17 @@
 #include "PluginEditor.h"
 #include "version.h"
 
+#include "ButtonParameter.hpp"
+
 #include <audiomidi/AudioMidiServices.hpp>
 #include <audiomidi/DiskRecorder.hpp>
 #include <audiomidi/SoundRecorder.hpp>
 #include <audiomidi/MpcMidiPorts.hpp>
 #include <audiomidi/MpcMidiInput.hpp>
+
+#include <hardware/Hardware.hpp>
+#include <hardware/HwComponent.hpp>
+#include <hardware/Button.hpp>
 
 #include <file/aps/ApsParser.hpp>
 #include <file/all/AllParser.hpp>
@@ -64,6 +70,15 @@ VmpcAudioProcessor::VmpcAudioProcessor()
     moduru::Logger::l.log("\n\n-= vMPC2000XL v" + string(version::get()) + " " + timeString.substr(0, timeString.length() - 1) + " =-\n");
     
     mpc.init(44100.f, 1, 5);
+    
+    for (auto& b : mpc.getHardware().lock()->getButtons())
+    {
+        auto button = b.lock();
+        auto label = button->getLabel();
+        auto param = buttonStates[label] = new ButtonParameter(mpc, label);
+        
+        addParameter(param);
+    }
 }
 
 VmpcAudioProcessor::~VmpcAudioProcessor()
