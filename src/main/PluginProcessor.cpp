@@ -672,14 +672,19 @@ void VmpcAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
         }
         
         auto screen = mpc_ui->getStringAttribute("screen").toStdString();
-        mpc.getLayeredScreen().lock()->openScreen(screen);
         
-        auto focus = mpc_ui->getStringAttribute("focus").toStdString();
+        auto layeredScreen = mpc.getLayeredScreen().lock();
         
-        if (focus.length() > 0)
-            mpc.getLayeredScreen().lock()->setFocus(focus);
+        if (layeredScreen->getCurrentScreenName().compare("vmpc-clean") != 0)
+        {
+            layeredScreen->openScreen(screen);
+            auto focus = mpc_ui->getStringAttribute("focus").toStdString();
+            
+            if (focus.length() > 0)
+                layeredScreen->setFocus(focus);
+        }
         
-        mpc.getLayeredScreen().lock()->setDirty();
+        layeredScreen->setDirty();
         
         mpc.getSampler().lock()->setSoundIndex(mpc_ui->getIntAttribute("soundIndex"));
     }
