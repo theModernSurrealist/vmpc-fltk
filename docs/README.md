@@ -71,7 +71,7 @@ Section Title
   **Demo recovery data:** Demo beats that are never modified by VMPC2000XL
   ```
 
-- `Inline literals` to refer to file names, directory names, paths, terminal commands, keypresses, screen names, literal references to UI and LCD text and code.
+`Inline literals` to refer to file names, directory names, paths, terminal commands, keypresses, screen names, literal references to UI and LCD text and code.
 
   ```
 Click on the :code:`Options` button in the top-left and click :code:`Audio/MIDI Settings`.
