@@ -13,15 +13,15 @@ Standalone
 
 Linux
 ^^^^^
-If you have followed the recommendations of the :ref:`Manual installation (Ubuntu 18) <manual_installation_for_ubuntu>` section, your standalone application is in :code:`/usr/local/bin`.
+If you have followed the recommendations of the :ref:`Manual installation (Ubuntu 18) <manual_installation_for_ubuntu>` section, your standalone application is in :file:`/usr/local/bin`.
 
-By default this path is in your :code:`PATH` environment variable, so you can run VMPC2000XL from anywhere in the terminal by typing :code:`VMPC2000XL` and pressing enter.
+By default this path is in your :envvar:`PATH` environment variable, so you can run VMPC2000XL from anywhere in the terminal by typing :command:`VMPC2000XL` and pressing enter.
 
-If you want to detach the process from the terminal completely, so you can use it for something else or close it, run :code:`VMPC2000XL &; disown`.
+If you want to detach the process from the terminal completely, so you can use it for something else or close it, run :command:`VMPC2000XL &; disown`.
 
 MacOS
 ^^^^^
-Navigate to :code:`Applications` in Finder, locate :code:`VMPC2000XL` and double-click it. Alternatively use Spotlight and start typing "VMPC2000XL". Pretty soon the application shows up and you can press Enter to start it.
+Navigate to :file:`Applications` in Finder, locate :file:`VMPC2000XL` and double-click it. Alternatively use Spotlight and start typing "VMPC2000XL". Pretty soon the application shows up and you can press Enter to start it.
 
 Windows
 ^^^^^^^
@@ -108,7 +108,7 @@ When you start VMPC2000XL for the first time, there are no sounds in memory. Let
 1. Via the :code:`LOAD` screen
 2. Drag-and-drop a WAV or SND file onto a pad
 
-Another way to load sounds is by loading a :code:`PGM` or :code:`APS` file. After having learned how to load individual WAV or SND files in the section you are reading, it's fairly simple to figure out how to load :code:`PGM` and :code:`APS` files. Please refer to the `MPC2000XL manual <https://www.platinumaudiolab.com/free_stuff/manuals/Akai/akai_mpc2000xl_manual.pdf>`_ to see the details of this process.
+Another way to load sounds is by loading a :file:`PGM` or :file:`APS` file. After having learned how to load individual WAV or SND files in the section you are reading, it's fairly simple to figure out how to load :file:`PGM` and :file:`APS` files. Please refer to the `MPC2000XL manual <https://www.platinumaudiolab.com/free_stuff/manuals/Akai/akai_mpc2000xl_manual.pdf>`_ to see the details of this process.
 
 LOAD screen
 +++++++++++
@@ -117,14 +117,14 @@ To open the :code:`LOAD` screen:
 * Make sure the sequencer is not playing
 * Press :code:`Shift` and :code:`3` simultaneously to open the :code:`LOAD` screen
 * Press the ↓ key to navigate to the :code:`File:` field
-* Press the :code:`-` and :code:`+` keys, or drag the DATA wheel with the mouse, to change :code:`File:` to :code:`TEST1`
+* Press the :code:`-` and :code:`+` keys, or drag the DATA wheel with the mouse, to change :code:`File:` to :file:`TEST1`
 
 .. image:: images/getting_started/file_test1.png
    :width: 400 px
    :align: center
 
-* Press :code:`F6` to enter the :code:`TEST1` directory
-* Turn the DATA wheel to change :code:`File:` to :code:`KICK1           .SND`
+* Press :code:`F6` to enter the :file:`TEST1` directory
+* Turn the DATA wheel to change :code:`File:` to :file:`KICK1           .SND`
 
 .. image:: images/getting_started/file_kick1.png
    :width: 400 px
@@ -142,7 +142,7 @@ To open the :code:`LOAD` screen:
 
 Now when you click pad 1 or press :code:`z` you should hear a kick drum.
 
-Go through the same process for the :code:`HAT1` and :code:`SNARE4` sounds from the same directory and you have assembled a basic kit.
+Go through the same process for the :file:`HAT1` and :file:`SNARE4` sounds from the same directory and you have assembled a basic kit.
 
 Drag-and-drop
 +++++++++++++

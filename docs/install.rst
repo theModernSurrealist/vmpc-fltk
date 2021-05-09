@@ -26,15 +26,15 @@ For now the recommended process for Ubuntu 18 is as follows:
 
 * Visit http://izmar.nl/index.php/downloads
 * Download what you need, place it where you want and run it
-* Optionally download `the demo beats <https://github.com/izzyreal/mpc/tree/master/demo_data>`_ and save them into :code:`~/Documents/VMPC2000XL/Volumes/MPC2000XL`.
+* Optionally download `the demo beats <https://github.com/izzyreal/mpc/tree/master/demo_data>`_ and save them into :file:`~/Documents/VMPC2000XL/Volumes/MPC2000XL`.
 
-As per the `Filesystem Hierarchy Standard <https://www.pathname.com/fhs/pub/fhs-2.3.html#PURPOSE23>`_, the recommended location to store the portable `VMPC2000XL` executable is in :code:`/usr/local/bin`.
+As per the `Filesystem Hierarchy Standard <https://www.pathname.com/fhs/pub/fhs-2.3.html#PURPOSE23>`_, the recommended location to store the portable `VMPC2000XL` executable is in :file:`/usr/local/bin`.
 
-As per the `LV2 docs <https://lv2plug.in/pages/filesystem-hierarchy-standard.html>`_, the recommended location to store :code:`VMPC2000XL.lv2` is one of these:
+As per the `LV2 docs <https://lv2plug.in/pages/filesystem-hierarchy-standard.html>`_, the recommended location to store :file:`VMPC2000XL.lv2` is one of these:
 
-* :code:`~/.lv2`
-* :code:`/usr/local/lib/lv2`
-* :code:`/user/lib/lv2`
+* :file:`~/.lv2`
+* :file:`/usr/local/lib/lv2`
+* :file:`/user/lib/lv2`
 
 The standalone is built with JACK support, which is the recommended driver type to use.
 
@@ -64,11 +64,11 @@ The installers allows you to select which format(s) (standalone, VST3 and AU) yo
 
 MacOS
 +++++
-The MacOS installer deploys universal binaries, compatible with Intel and Apple Silicon systems, in standalone, VST3 and AU formats. Plugins are installed in :code:`/Users/you/Library/Audio/Plug-Ins`.
+The MacOS installer deploys universal binaries, compatible with Intel and Apple Silicon systems, in standalone, VST3 and AU formats. Plugins are installed in :file:`/Users/you/Library/Audio/Plug-Ins`.
 
 Windows
 +++++++
-The Windows installer deploys 64 bit binaries on 64 bit systems, and 32 bit binaries on 32 bit systems, in standalone and VST3 formats. The VST3 is installed into :code:`C:\Program Files\Common Files\VST3` on 64 bit systems, :code:`C:\Program Files (x86)\Common Files\VST3` on 32 bit systems.
+The Windows installer deploys 64 bit binaries on 64 bit systems, and 32 bit binaries on 32 bit systems, in standalone and VST3 formats. The VST3 is installed into :file:`C:\\Program Files\\Common Files\\VST3` on 64 bit systems, :file:`C:\\Program Files (x86)\\Common Files\\VST3` on 32 bit systems.
 
 .. admonition:: Important note for Windows users
 
@@ -88,27 +88,27 @@ Uninstall
 
 MacOS
 +++++
-Remove :code:`/Applications/VMPC2000XL.app` for v0.3 and later. Remove :code:`/Applications/vMPC.app` if you have v0.2 or older.
+Remove :file:`/Applications/VMPC2000XL.app` for v0.3 and later. Remove :file:`/Applications/vMPC.app` if you have v0.2 or older.
 
-Plugins can be removed from :code:`/Library/Audio/Plug-Ins`.
+Plugins can be removed from :file:`/Library/Audio/Plug-Ins`.
 
 Windows
 +++++++
 Run any VMPC2000XL and vMPC uninstallers you have in Add/Remove Programs.
 
-Assuming you have installed VMPC2000XL into its default location, you can manually delete :code:`C:\Program Files\VMPC2000XL` and :code:`C:\Program Files\vMPC` afterwards. On 32 bit systems, and some v0.2 and older installations on 64 bit systems, you can delete the same directories from :code:`C:\Program Files (x86)`.
+Assuming you have installed VMPC2000XL into its default location, you can manually delete :file:`C:\\Program Files\\VMPC2000XL` and :file:`C:\\Program Files\\vMPC` afterwards. On 32 bit systems, and some v0.2 and older installations on 64 bit systems, you can delete the same directories from :file:`C:\\Program Files (x86)`.
 
-VST3 plugins can be removed from :code:`C:\Program Files\Common Files\VST3`, :code:`C:\Program Files (x86)\Common Files\VST3` or any other locations where you store plugins.
+VST3 plugins can be removed from :file:`C:\\Program Files\\Common Files\VST3`, :file:`C:\\Program Files (x86)\\Common Files\\VST3` or any other locations where you store plugins.
 
 Linux
 +++++
-As per the `Filesystem Hierarchy Standard <https://www.pathname.com/fhs/pub/fhs-2.3.html#PURPOSE23>`_, you have likely placed your portable :code:`VMPC2000XL` executable in :code:`/usr/local/bin`.
+As per the `Filesystem Hierarchy Standard <https://www.pathname.com/fhs/pub/fhs-2.3.html#PURPOSE23>`_, you have likely placed your portable :file:`VMPC2000XL` executable in :file:`/usr/local/bin`.
 
-As per the `LV2 docs <https://lv2plug.in/pages/filesystem-hierarchy-standard.html>`_, you likely have your :code:`VMPC2000XL.lv2` in one of these locations and can remove it from there:
+As per the `LV2 docs <https://lv2plug.in/pages/filesystem-hierarchy-standard.html>`_, you likely have your :file:`VMPC2000XL.lv2` in one of these locations and can remove it from there:
 
-* :code:`~/.lv2`
-* :code:`/usr/local/lib/lv2`
-* :code:`/user/lib/lv2`
+* :file:`~/.lv2`
+* :file:`/usr/local/lib/lv2`
+* :file:`/user/lib/lv2`
 
 Cleanup
 +++++++
@@ -124,16 +124,16 @@ There are three categories of files:
 
 #. **Demo recovery data:** Demo beats that are never modified by VMPC2000XL
 #. **Documents:**
-    * Everything you create: :code:`VMPC2000XL/Volumes/MPC2000XL`
-    * Direct-to-disk recordings: :code:`VMPC2000XL/Recordings`
-    * Log file: :code:`VMPC2000XL/vmpc.log`
+    * Everything you create: :file:`VMPC2000XL/Volumes/MPC2000XL`
+    * Direct-to-disk recordings: :file:`VMPC2000XL/Recordings`
+    * Log file: :file:`VMPC2000XL/vmpc.log`
 #. **Configuration files:**
-    * Keyboard mapping: :code:`config/keys.txt`
-    * NVRAM data (main screen user defaults): :code:`config/nvram.vmp`
-    * VMPC2000XL-specific: :code:`config/vmpc-specific.ini`
-    * Audio/MIDI configuration and auto-save data: :code:`VMPC2000XL.settings`
+    * Keyboard mapping: :file:`config/keys.txt`
+    * NVRAM data (main screen user defaults): :file:`config/nvram.vmp`
+    * VMPC2000XL-specific: :file:`config/vmpc-specific.ini`
+    * Audio/MIDI configuration and auto-save data: :file:`VMPC2000XL.settings`
 
-On MacOS and Windows, demo data is bundled into the installer, which places it in a safe location from which it can always be restored. When you start VMPC2000XL, a check is performed to see if a :code:`DEMOS` directory exists in your user data directory. If not, a fresh copy of the original demo data will be placed in :code:`VMPC2000XL/Volumes/MPC2000XL/DEMOS`.
+On MacOS and Windows, demo data is bundled into the installer, which places it in a safe location from which it can always be restored. When you start VMPC2000XL, a check is performed to see if a :file:`DEMOS` directory exists in your user data directory. If not, a fresh copy of the original demo data will be placed in :file:`VMPC2000XL/Volumes/MPC2000XL/DEMOS`.
 
 Resources that are absolutely required by the application, such as background images and the metronome click PCM WAV data, are bundled into the executables and plugins, making them fully portable and self-contained. Hence you will not find such files anywhere in your filesystem.
 
@@ -141,38 +141,38 @@ Linux
 +++++
 **Demo recovery data** Unavailable
 
-**Documents** :code:`~/Documents/VMPC2000XL`
+**Documents** :file:`~/Documents/VMPC2000XL`
 
-**Configuration files** :code:`~/.config/VMPC2000XL/config` and :code:`~/.config/VMPC2000XL.settings`
+**Configuration files** :file:`~/.config/VMPC2000XL/config` and :file:`~/.config/VMPC2000XL.settings`
 
 MacOS
 +++++
-**Demo recovery data** :code:`/Library/Application Support/VMPC2000XL/DemoData`
+**Demo recovery data** :file:`/Library/Application Support/VMPC2000XL/DemoData`
 
-**Documents** :code:`/Users/you/Documents/VMPC2000XL`
+**Documents** :file:`/Users/you/Documents/VMPC2000XL`
 
-**Configuration files** :code:`/Users/you/Library/Application Support/VMPC2000XL/config` and :code:`/Users/you/Library/Application Support/VMPC2000XL.settings`
+**Configuration files** :file:`/Users/you/Library/Application Support/VMPC2000XL/config` and :file:`/Users/you/Library/Application Support/VMPC2000XL.settings`
 
 Windows
 +++++++
-**Demo recovery data** :code:`C:\Users\you\AppData\Roaming\VMPC2000XL\DemoData`
+**Demo recovery data** :file:`C:\\Users\you\\AppData\\Roaming\\VMPC2000XL\\DemoData`
 
-**Documents** :code:`C:\Users\you\Documents\VMPC2000XL`
+**Documents** :file:`C:\\Users\\you\\Documents\\VMPC2000XL`
 
-**Configuration files** :code:`C:\Users\you\AppData\Roaming\VMPC2000XL\config` and :code:`C:\Users\you\AppData\Roaming\VMPC2000XL\VMPC2000XL.settings`
+**Configuration files** :file:`C:\\Users\\you\\AppData\\Roaming\\VMPC2000XL\\config` and :file:`C:\\Users\\you\\AppData\\Roaming\\VMPC2000XL\\VMPC2000XL.settings`
 
 
 File Locations (v0.3 and lower)
 -------------------------------
 
-In older releases most non-application files are stored in :code:`/Users/you/vMPC` on MacOS and Windows. 
+In older releases most non-application files are stored in :file:`/Users/you/vMPC` on MacOS and Windows. 
 
-On Linux most non-application files are stored in :code:`/home/you/vMPC`.
+On Linux most non-application files are stored in :file:`/home/you/vMPC`.
 
-When you are cleaning up, you can remove this :code:`vMPC` directory completely, or you can backup your sounds, sequences, programs and so on from :code:`vMPC/Stores/MPC2000XL`.
+When you are cleaning up, you can remove this :file:`vMPC` directory completely, or you can backup your sounds, sequences, programs and so on from :file:`vMPC/Stores/MPC2000XL`.
 
-On Windows audio/MIDI preferences are saved in :code:`C:\Users\you\AppData\Roaming\vmpc.settings`.
+On Windows audio/MIDI preferences are saved in :file:`C:\\Users\\you\\AppData\\Roaming\\vmpc.settings`.
 
-On MacOS this is :code:`/Users/you/Library/Application Support/vmpc.settings`.
+On MacOS this is :file:`/Users/you/Library/Application Support/vmpc.settings`.
 
-On Linux it is :code:`~/.config/vmpc.settings`.
+On Linux it is :file:`~/.config/vmpc.settings`.

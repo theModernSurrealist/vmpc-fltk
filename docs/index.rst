@@ -15,7 +15,7 @@ VMPC2000XL is completely `free and open source <https://github.com/izzyreal/vmpc
    :maxdepth: 2
 
    introduction
-   installation
+   install
    getting_started
    controls
    vmpc_specific_settings
