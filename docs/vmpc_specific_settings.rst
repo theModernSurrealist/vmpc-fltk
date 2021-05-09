@@ -1,4 +1,7 @@
 VMPC2000XL Specific Settings
 ============================
 
-Foo
+.. _configuring_the_keyboard:
+
+Configuring the Keyboard
+------------------------
