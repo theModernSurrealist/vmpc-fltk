@@ -76,7 +76,7 @@ When you open VMPC2000XL as a plugin in your DAW or plugin host, there are no au
 
 For some suggested buffer size settings, see `Audio buffer size`_.
 
-.. _soundcheck::
+.. _soundcheck:
 
 Soundcheck - Hearing the metronome
 ----------------------------------
@@ -92,7 +92,10 @@ If you're not in the :code:`Main` screen, press the :code:`Esc` key to go there.
 
 Click the :code:`PLAY` button or press :code:`Space` to start playing the empty sequence. The green LED next to the :code:`PLAY` button should light up, :code:`Now:001.01.00` should start counting and you should hear a metronome click on every beat.
 
-Click the :code:`STOP` button or press :code:`\` to stop the sequencer.
+.. The :file: role below is not a typo. For some reason 2 backslashes appear when
+   the :code: role is used.
+
+Click the :code:`STOP` button or press :file:`\\` to stop the sequencer.
 
 .. note::
 
