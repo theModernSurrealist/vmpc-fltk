@@ -4,7 +4,7 @@ Controls
 There are 3 ways to control VMPC2000XL:
 
 * Keyboard
-* Mouse
+* Mouse/touchscreen
 * MIDI
 
 It is **strongly recommended** to get familiar with :ref:`basic keyboard shortcuts <basic_operations>` rather than relying on the mouse. The more keyboard shortcuts you use, likely the greater the sense of immersion.
@@ -93,3 +93,35 @@ Operation               Key(s)
 ======================= ==================================
 Direct-to-disk recorder Shift + Play start (defaults to L)
 ======================= ==================================
+
+Mouse & touchscreen
+-------------------
+
+Pads
+++++
+
+The pads can be hit by by clicking them with the mouse, or, if you have a touchscreen, by touching them. The further away from the center of the pad, the lower the velocity. When a pad is hit, it will light up blue.
+
+Buttons
++++++++
+
+All buttons can be pressed by clicking them with the mouse, or, if you have a touchscreen, by touching them.
+
+Data wheel
+++++++++++
+
+The data wheel can be turned by dragging or scrolling. Precise, single-step changes can be performed by holding any of the modifier keys (Shift, Ctrl, Alt/Option) while dragging.
+
+Slider/Rec gain/Main volume
++++++++++++++++++++++++++++
+
+These controls can be operated by dragging or scrolling.
+
+.. note::
+
+  If your mouse or touchpad emits momentum/inertia events, VMPC2000XL will process these accordingly. The data wheel, slider, rec gain and main volume controls will come to a gradual stop.
+
+MIDI
+----
+
+Please refer to the `MPC2000XL manual <https://www.platinumaudiolab.com/free_stuff/manuals/Akai/akai_mpc2000xl_manual.pdf>`_ (p185) to see the details of assigning MIDI Continuous Controllers to MPC2000XL functionality.
