@@ -102,4 +102,34 @@ To discard the changes you made in the :code:`KEYBRD` screen, press :code:`Esc` 
    :width: 400 px
    :align: center
 
-Besides discarding your changes, in this window you can choose to stay in the :code:`KEYBRD` screen and continue making changes, or you can save your changes, after which you'll go to the Main screen.
+Besides discarding your changes, you can choose to stay in the :code:`KEYBRD` screen and continue making changes, or you can save your changes, after which you'll go to the Main screen.
+
+Configuring auto-save in the AUTSAV tab
+---------------------------------------
+
+Though auto-save happens implicitly when running VMPC2000XL as a plugin, the related settings only affect behaviour of the standalone version.
+
+The following aspects are part of the state that is saved and loaded as part of this feature in both standalone and plugin versions of VMPC2000XL:
+
+* All programs and sounds
+* All sequences
+* Current screen
+* Current focus in that screen
+* Current sound (in TRIM, LOOP, etc.)
+* Current directory (in LOAD and SAVE)
+
+.. warning::
+
+  Since all sounds are stored in your DAW project files, be mindful of their filesize
+
+You can choose to auto-save upon exit and auto-load upon start. Both operations can be in 3 states:
+
+* Disabled
+* Ask
+* Enabled
+
+The default configuration is like this:
+
+.. image:: images/vmpc_specific_settings/default_autosave_configuration.png
+   :width: 400 px
+   :align: center
