@@ -1,7 +1,7 @@
 VMPC2000XL Specific Settings
 ============================
 
-In this  access these section we will discuss settings that can't be found on the real MPC2000XL. Tosettings, press :kbd:`Shift + 0`.
+In this section we will discuss settings that can't be found on the real MPC2000XL. To access these settings, press :kbd:`Shift + 0`.
 
 The SETNGS tab
 --------------
@@ -107,7 +107,7 @@ Besides discarding your changes, you can choose to stay in the :code:`KEYBRD` sc
 Configuring auto-save in the AUTSAV tab
 ---------------------------------------
 
-Though auto-save happens implicitly when running VMPC2000XL as a plugin, the related settings only affect behaviour of the standalone version.
+Though auto-save also happens when running VMPC2000XL as a plugin, these settings **only affect behaviour of the standalone version**.
 
 The following aspects are part of the state that is saved and loaded as part of this feature in both standalone and plugin versions of VMPC2000XL:
 
@@ -120,7 +120,7 @@ The following aspects are part of the state that is saved and loaded as part of 
 
 .. warning::
 
-  Since all sounds are stored in your DAW project files, be mindful of their filesize
+  Since all sounds are stored in your DAW project files, be aware of their combined size. If you have 32MB of sounds in memory, your project file will become 32MB bigger.
 
 You can choose to auto-save upon exit and auto-load upon start. Both operations can be in 3 states:
 
@@ -133,3 +133,21 @@ The default configuration is like this:
 .. image:: images/vmpc_specific_settings/default_autosave_configuration.png
    :width: 400 px
    :align: center
+
+When :code:`Auto-save on exit` is set to :code:`Ask`, you will be asked whether to save your session or don't save (in which case **it will be deleted permanently**):
+
+.. image:: images/vmpc_specific_settings/autosave_this_session.png
+   :width: 400 px
+   :align: center
+
+When it's set to :code:`Disabled`, your sessions will never be auto-saved upon exiting VMPC2000XL. Likewise, when it's set to :code:`Enabled` your sessions will be silently auto-saved when you exit, **overwriting your previous auto-save**.
+
+A similar logic applies to the :code:`Auto-load on start` setting. When it's set to :code:`Ask`, the following dialog appears upon startup if an auto-saved session is detected:
+
+.. image:: images/vmpc_specific_settings/continue_previous_session.png
+   :width: 400 px
+   :align: center
+
+When it's set to :code:`Disabled`, your sessions will never be auto-saved when you exit. When it's set to :code:`Enabled` your sessions will be silently restored when you open VMPC2000XL.
+
+
