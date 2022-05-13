@@ -49,7 +49,11 @@ juce_add_plugin(vmpc2000xl
     APP_GROUPS_ENABLED TRUE
     APP_GROUP_IDS group.com.Izmar.vmpc2000xl
     FILE_SHARING_ENABLED TRUE
-    PLIST_TO_MERGE "<plist version=\"1.0\"><dict><key>LSSupportsOpeningDocumentsInPlace</key><true/></dict></plist>"
+    DOCUMENT_BROWSER_ENABLED TRUE
+    DOCUMENT_EXTENSIONS wav snd mid all pgm aps
+    ICLOUD_PERMISSIONS_ENABLED TRUE
+
+    # PLIST_TO_MERGE "<plist version=\"1.0\"><dict><key>LSSupportsOpeningDocumentsInPlace</key><true/></dict></plist>"
 
     # Relevant to macOS and iOS
     BUNDLE_ID com.Izmar.vmpc2000xl
