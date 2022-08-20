@@ -3,7 +3,6 @@
 #include <controls/KeyEventHandler.hpp>
 #include <controls/KeyEvent.hpp>
 
-#include <stdio.h>
 #include "portaudio.h"
 
 #include <Mpc.hpp>
@@ -29,8 +28,11 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Double_Window.H>
+#include <stdio.h>
+#include <time.h>
 #include <FL/fl_draw.H>
-#include <FL/Fl_Input.H>
 
 using namespace mpc::lcdgui;
 using namespace mpc::lcdgui::screens;
@@ -39,7 +41,42 @@ using namespace mpc;
 #define SAMPLE_RATE   (44100)
 #define FRAMES_PER_BUFFER  (512)
 
-static int patestCallback(const void* inputBuffer, void* outputBuffer,
+#define XSIZE 248
+#define YSIZE 60
+#define UPDATE_RATE 0.2
+
+class LCDWidget : public Fl_Widget {
+private:
+	mpc::Mpc& mpc;
+public:
+	LCDWidget(mpc::Mpc& _mpc) : Fl_Widget(0, 0, XSIZE, YSIZE), mpc(_mpc) {}
+	unsigned char pixbuf[YSIZE][XSIZE];
+	void draw() override
+	{
+		auto ls = mpc.getLayeredScreen().lock();
+		mpc.getLayeredScreen().lock()->Draw();
+		auto pixels = mpc.getLayeredScreen().lock()->getPixels();
+
+		for (int x = 0; x < XSIZE; x++)
+		{
+			for (int y = 0; y < YSIZE; y++)
+			{
+				if ((*pixels)[x][y])
+				{
+					pixbuf[y][x] = 0;
+				}
+				else
+				{
+					pixbuf[y][x] = 255;
+				}
+			}
+		}
+
+		fl_draw_image_mono((const uchar*)&pixbuf, 0, 0, XSIZE, YSIZE);
+	}
+};
+
+static int paCallback(const void* inputBuffer, void* outputBuffer,
 	unsigned long framesPerBuffer,
 	const PaStreamCallbackTimeInfo* timeInfo,
 	PaStreamCallbackFlags statusFlags,
@@ -47,45 +84,42 @@ static int patestCallback(const void* inputBuffer, void* outputBuffer,
 {
 	mpc::Mpc* mpc = (mpc::Mpc*)mpcPtr;
 	float* out = (float*)outputBuffer;
-	unsigned long i;
+	float* in = (float*)inputBuffer;
 
 	(void)timeInfo; /* Prevent unused variable warnings. */
 	(void)statusFlags;
 	(void)inputBuffer;
 
-	std::vector<std::vector<float>> tempBufferOut(2, std::vector<float>(FRAMES_PER_BUFFER));
-	std::vector<float*> tempBufferOutAdapter{ tempBufferOut[0].data(), tempBufferOut[1].data() };
-
 	auto server = mpc->getAudioMidiServices().lock()->getAudioServer();
-	server->work(nullptr, tempBufferOutAdapter.data(), FRAMES_PER_BUFFER, 0, 2);
-
-	for (i = 0; i < framesPerBuffer; i++)
-	{
-		*out++ = tempBufferOut[0][i];
-		*out++ = tempBufferOut[1][i];
-	}
+	server->work(in, out, FRAMES_PER_BUFFER, 2, 2);
 
 	return paContinue;
 }
 
-void drawScreen(void* mpcPtr) {
-	mpc::Mpc* mpc = (mpc::Mpc*)mpcPtr;
-	auto ls = mpc->getLayeredScreen().lock();
-	mpc->getLayeredScreen().lock()->Draw();
-	auto pixels = mpc->getLayeredScreen().lock()->getPixels();
-	for (int y = 0; y < 60; y++) {
-		for (int x = 0; x < 248; x++) {
-			if ((*pixels)[x][y]) {
-				fl_color(FL_BLACK);
-			}
-			else {
-				fl_color(234, 243, 219);
-			}
-			fl_point(x, y);
-		}
-	}
-	//std::cout << "test loop" << std::endl;
-	Fl::repeat_timeout(0.2, drawScreen, mpc);
+//void drawScreen(void* mpcPtr) {
+//	mpc::Mpc* mpc = (mpc::Mpc*)mpcPtr;
+//	auto ls = mpc->getLayeredScreen().lock();
+//	mpc->getLayeredScreen().lock()->Draw();
+//	auto pixels = mpc->getLayeredScreen().lock()->getPixels();
+//	for (unsigned int y = 0; y < 60; y++) {
+//		for (unsigned int x = 0; x < 248; x++) {
+//			if ((*pixels)[x][y]) {
+//				fl_color(FL_BLACK);
+//			}
+//			else {
+//				fl_color(FL_GREEN);
+//			}
+//			fl_point(x, y);
+//		}
+//	}
+//	//std::cout << "test loop" << std::endl;
+//	Fl::repeat_timeout(0.2, drawScreen, mpc);
+//}
+
+void drawScreen(void* lcdPtr) {
+	LCDWidget* lcdWidget = (LCDWidget*)lcdPtr;
+	lcdWidget->redraw();
+	Fl::repeat_timeout(0.2, drawScreen, lcdWidget);
 }
 
 int rawHandler(void* event, void* mpcPtr)
@@ -134,6 +168,7 @@ int escKeyConsumer(int event)
 void initialisePortAudio(mpc::Mpc *mpc)
 {
 	PaStreamParameters outputParameters;
+	PaStreamParameters inputParameters;
 	PaStream* stream;
 	PaError err;
 
@@ -144,24 +179,36 @@ void initialisePortAudio(mpc::Mpc *mpc)
 		fprintf(stderr, "Error: No default output device.\n");
 		return;
 	}
+
+	inputParameters.device = Pa_GetDefaultInputDevice();
+	if (inputParameters.device == paNoDevice) {
+		fprintf(stderr, "Error: No default input device.\n");
+		return;
+	}
+
 	outputParameters.channelCount = 2;   
 	outputParameters.sampleFormat = paFloat32;
 	outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
 	outputParameters.hostApiSpecificStreamInfo = NULL;
 
+	inputParameters.channelCount = 2;
+	inputParameters.sampleFormat = paFloat32;
+	inputParameters.suggestedLatency = Pa_GetDeviceInfo(inputParameters.device)->defaultLowInputLatency;
+	inputParameters.hostApiSpecificStreamInfo = NULL;
+
 	err = Pa_OpenStream(
 		&stream,
-		NULL, 
+		&inputParameters,
 		&outputParameters,
 		SAMPLE_RATE,
 		FRAMES_PER_BUFFER,
 		paClipOff,     
-		patestCallback,
+		paCallback,
 		mpc);
 	
 	err = Pa_StartStream(stream);
 
-	printf("o");
+	printf("Open");
 }
 
 int main(int argc, char** argv) {
@@ -169,18 +216,22 @@ int main(int argc, char** argv) {
 	mpc.init(44100, 1, 1);
 	auto server = mpc.getAudioMidiServices().lock()->getAudioServer();
 	server->resizeBuffers(FRAMES_PER_BUFFER);
-	Fl_Window* window = new Fl_Window(248, 60);
-	Fl_Box* box = new Fl_Box(10, 10, 250, 70);
-	//window->fullscreen();
+	
+	Fl::visual(FL_RGB);
+	Fl_Window* win = new Fl_Window(0,0,XSIZE, YSIZE);
+	win->begin();
+	LCDWidget* lcdWidget = new LCDWidget(mpc);
+	win->add(lcdWidget);
 
-	Fl::add_timeout(1.0, drawScreen, &mpc);
+	Fl::add_timeout(0.2, drawScreen, lcdWidget);
 	Fl::add_handler(escKeyConsumer);
 	Fl::add_system_handler(rawHandler, &mpc);
 	initialisePortAudio(&mpc);
-	window->end();
-	window->show(argc, argv);
+	win->end();
+	win->show();
 
 	int exitCode = Fl::run();
+	
 	Pa_Terminate();
 	return exitCode;
 }
