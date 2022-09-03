@@ -2,3 +2,6 @@
 
 ## This is still very WIP!
 ## Instructions for compiling an executable are at izzyreal/vmpc-juce
+
+This implementation consists of only the screen portion of the MPC - it is controlled by keyboard shortcuts/MIDI.
+Settings will be modified from a configuration script.
