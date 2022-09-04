@@ -50,6 +50,12 @@ CPMAddPackage(
 )
 
 CPMAddPackage("gh:PortAudio/portaudio#v19.7.0")
+CPMAddPackage(
+	NAME portmidi
+	GITHUB_REPOSITORY PortMidi/portmidi
+	GIT_TAG v2.0.3
+	OPTIONS "BUILD_SHARED_LIBS OFF"
+)
 
 foreach(_source IN ITEMS ${_source_list})
     get_filename_component(_source_path "${_source}" PATH)
@@ -73,11 +79,13 @@ endif()
 
 
 target_link_libraries(vmpc-fltk PUBLIC fltk)
+target_link_libraries(vmpc-fltk PUBLIC portmidi)
 target_link_libraries(vmpc-fltk PUBLIC ${CONAN_LIBS})
 target_include_directories(vmpc-fltk PUBLIC ${fltk_SOURCE_DIR})
 target_include_directories(vmpc-fltk PUBLIC ${fltk_BINARY_DIR})
 target_link_libraries(${vmpc-fltk} fltk fltk_images) 
 target_link_libraries(vmpc-fltk PUBLIC portaudio_static)
+
 
 if(MSVC)
 	target_compile_options(vmpc-fltk PRIVATE "/MP")

@@ -91,6 +91,7 @@ static int paCallback(const void* inputBuffer, void* outputBuffer,
 	(void)inputBuffer;
 
 	auto server = mpc->getAudioMidiServices().lock()->getAudioServer();
+	mpc->getAudioMidiServices().lock()->changeSoundRecorderStateIfRequired();
 	server->work(in, out, FRAMES_PER_BUFFER, 2, 2);
 
 	return paContinue;
@@ -129,12 +130,13 @@ int rawHandler(void* event, void* mpcPtr)
 #ifdef __linux__ 
 	XEvent* xEvent = (XEvent*)event;
 	if (xEvent->type == KeyPress) {
-		XKeyEvent* xKeyEvent = (XKeyEvent*)xEvent; 
+		XKeyEvent* xKeyEvent = (XKeyEvent*)xEvent;
 		uint32_t keyEventCode = xEvent->xkey.keycode;
 		std::cout << keyEventCode << '\n';
 		KeySym ks = XKeycodeToKeysym(fl_display, keyEventCode, 0);
 		keyEventHandler->handle(KeyEvent(ks, true));
-	} else if (xEvent->type == KeyRelease) {
+	}
+	else if (xEvent->type == KeyRelease) {
 		XKeyEvent* xKeyEvent = (XKeyEvent*)xEvent;
 		uint32_t keyEventCode = xEvent->xkey.keycode;
 		std::cout << keyEventCode << '\n';
@@ -161,11 +163,11 @@ int escKeyConsumer(int event)
 {
 	if (event == FL_SHORTCUT) {
 		return 1;
-	} 
+	}
 	return 0;
 }
 
-void initialisePortAudio(mpc::Mpc *mpc)
+void initialisePortAudio(mpc::Mpc* mpc)
 {
 	PaStreamParameters outputParameters;
 	PaStreamParameters inputParameters;
@@ -186,7 +188,7 @@ void initialisePortAudio(mpc::Mpc *mpc)
 		return;
 	}
 
-	outputParameters.channelCount = 2;   
+	outputParameters.channelCount = 2;
 	outputParameters.sampleFormat = paFloat32;
 	outputParameters.suggestedLatency = Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
 	outputParameters.hostApiSpecificStreamInfo = NULL;
@@ -202,10 +204,10 @@ void initialisePortAudio(mpc::Mpc *mpc)
 		&outputParameters,
 		SAMPLE_RATE,
 		FRAMES_PER_BUFFER,
-		paClipOff,     
+		paClipOff,
 		paCallback,
 		mpc);
-	
+
 	err = Pa_StartStream(stream);
 
 	printf("Open");
@@ -216,9 +218,9 @@ int main(int argc, char** argv) {
 	mpc.init(44100, 1, 1);
 	auto server = mpc.getAudioMidiServices().lock()->getAudioServer();
 	server->resizeBuffers(FRAMES_PER_BUFFER);
-	
+
 	Fl::visual(FL_RGB);
-	Fl_Window* win = new Fl_Window(0,0,XSIZE, YSIZE);
+	Fl_Window* win = new Fl_Window(0, 0, XSIZE, YSIZE);
 	win->begin();
 	LCDWidget* lcdWidget = new LCDWidget(mpc);
 	win->add(lcdWidget);
@@ -231,7 +233,7 @@ int main(int argc, char** argv) {
 	win->show();
 
 	int exitCode = Fl::run();
-	
+
 	Pa_Terminate();
 	return exitCode;
 }
